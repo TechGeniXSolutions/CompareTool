@@ -1,0 +1,190 @@
+﻿<Window x:Class="Matching_Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Matching_Project"
+        Loaded="Window_Loaded"
+        mc:Ignorable="d"
+        Title="Compare" 
+        Height="450" 
+        Width="800" 
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized">
+    <Grid>
+        
+            <Grid Margin="10" >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1">
+                <TextBox FontWeight="Bold"   Name="errorTextBox"  Background="LightGray" Height="60" Text="{Binding SuccessMessage}" IsReadOnly="True"/>
+            </StackPanel>
+        
+        </Grid>
+        <Grid  Margin="0,0,0,60">
+            <!--first of all main grid is devided into two equal columns With equal width-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--column one grid-->
+            <Grid Grid.Column="0" Margin="10,0,10,0">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBox Grid.Row="1" Name="txtage"  Text="{Binding CurrentItem.Age }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" BorderThickness="0,1" />
+
+                        <TextBlock Text="Height" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" />
+                        <TextBox Grid.Column="1" Name="txtheight" Text="{Binding CurrentItem.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+
+                        <TextBlock Text="President" Name="txtpresident" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" />
+
+                        <TextBox Grid.Column="2" Text="{Binding CurrentItem.President }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                    </Grid>
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Left">
+                        <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Command="{Binding LeftTableSaveCommand}"    />
+                    </StackPanel>
+
+                    <Grid Grid.Row="2">
+                        <Grid>
+                            <Grid Margin="0,40,0,0" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Age" FontWeight="Bold"  HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                                <TextBlock Text="Height" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Center"   VerticalAlignment="Center"   />
+                                <TextBlock Text="President" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Action" Grid.Column="3" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <Border BorderBrush="Gray" BorderThickness="0,0,0,1"
+                    Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
+                            </Grid>
+                            <ScrollViewer Margin="0,70,0,0">
+                                <ItemsControl Name="listItems"  ItemsSource="{Binding LeftItems ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Age}" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                                                <TextBlock Text="{Binding Height}" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding President}" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" />
+                                                <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right"   >
+                                                    <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{Binding ElementName=listItems, Path=DataContext.LeftTableEditCommand}" CommandParameter="{Binding}"/>
+                                                    <Button Content="Delete" FontSize="10" Style="{StaticResource MaterialDesignFlatAccentButton}" CommandParameter="{Binding}"
+                                        Command="{Binding ElementName=listItems, Path=DataContext.LeftTableDeleteCommand}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--column one two-->
+            <Grid Grid.Column="1" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="President"  VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="1"  Text="{Binding CurrentValue.President }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+
+                    <TextBlock Text="Height"  VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" />
+                    <TextBox Grid.Column="1" Text="{Binding CurrentValue.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
+
+                    <TextBlock Text="Age"  VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" />
+
+                    <TextBox Grid.Column="2" Text="{Binding CurrentValue.Age }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
+
+                </Grid>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
+                    <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Command="{Binding RightTableSaveCommand}"/>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid Margin="0,40,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="President" FontWeight="Bold"  HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                        <TextBlock Text="Height" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Center"   VerticalAlignment="Center"   />
+                        <TextBlock Text="Age" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Action" Grid.Column="3" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Border BorderBrush="Gray" BorderThickness="0,0,0,1"
+                    Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
+                    </Grid>
+                    <ScrollViewer Margin="0,70,0,0">
+                        <ItemsControl Name="listItem"  ItemsSource="{Binding RightItems ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="250"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding President}" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                                        <TextBlock Text="{Binding Height}" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding Age}" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" />
+                                        <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right"  >
+                                            <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{Binding ElementName=listItem, Path=DataContext.RightTableEditCommand}" CommandParameter="{Binding}"/>
+                                            <Button Content="Delete" FontSize="10" Style="{StaticResource MaterialDesignFlatAccentButton}" CommandParameter="{Binding}"
+                                        Command="{Binding ElementName=listItem, Path=DataContext.RightTableDeleteCommand}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Grid>
+       
+
+    </Grid>
+</Window>
