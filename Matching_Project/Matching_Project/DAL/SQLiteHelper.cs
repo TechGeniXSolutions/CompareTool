@@ -19,13 +19,13 @@ namespace Usman.CodeBlocks.SQLiteManager
         static SQLiteConnection con = new SQLiteConnection();
         static SQLiteCommand cmd;
         public static string DB_NAME = "MatchingProject.db";
-        public static string DB_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MatchingProject\\";
+        public static string DB_PATH = Environment.CurrentDirectory + "\\" + DB_NAME;
 
         public static void Connect()
         {
             try
             {
-                string connString = string.Format("Data Source={0};Version=3", DB_PATH + DB_NAME);
+                string connString = string.Format("Data Source={0};Version=3", DB_PATH);
                 con = new SQLiteConnection(connString);
                 if (con.State != ConnectionState.Open)
                     con.Open();
