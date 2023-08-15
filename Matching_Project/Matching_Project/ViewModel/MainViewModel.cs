@@ -105,6 +105,8 @@ namespace Matching_Project.ViewModel
                     {
                         // remove row from right column
                          LeftItems.Remove(leftrow);
+                        tableLeft.Delete(totalLeftRows);
+                        
 
                     }
                     else
