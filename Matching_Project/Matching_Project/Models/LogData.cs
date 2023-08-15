@@ -16,10 +16,10 @@ namespace Matching_Project.Models
         private bool _isleft;
 
         public int ID { get => _id; set => SetProperty(ref _id,value); }
-        public int Age { get; set; }
-        public int Height { get; set; }
-        public string President { get; set; }
-        public bool IsLeft { get; set; }
+        public int Age { get=>_age; set=>SetProperty(ref _age,value); }
+        public int Height { get=>_height; set=>SetProperty(ref _height,value); }
+        public string President { get=>_president; set=>SetProperty(ref _president,value); }
+        public bool IsLeft { get=>_isleft; set=>SetProperty(ref _isleft,value); }
 
     }
 }

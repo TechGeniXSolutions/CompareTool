@@ -20,7 +20,7 @@ namespace Matching_Project.ViewModel
     public class MainViewModel : ObservableObject
     {
         RightTableDAL tableRight;
-        leftTableDAL tableLeft;
+        LoginDAL tableLeft;
         private RightTable _currentValue;
         private ObservableCollection<LeftTable> _leftItems;
         public RightTable CurrentValue { get => _currentValue; set => SetProperty(ref _currentValue, value); }
@@ -63,7 +63,7 @@ namespace Matching_Project.ViewModel
             RightTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteRightTableDeleteCommand));
             LeftItems = new ObservableCollection<LeftTable>();
             CurrentItem = new LeftTable();
-            tableLeft = new leftTableDAL();
+            tableLeft = new LoginDAL();
             tableRight = new RightTableDAL();
 
             RightTableSaveCommand = new RelayCommand(ExecuteRightTableSaveCommand);

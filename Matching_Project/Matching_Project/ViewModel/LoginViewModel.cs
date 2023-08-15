@@ -10,9 +10,12 @@ using System.Windows.Input;
 
 namespace Matching_Project.ViewModel
 {
+    
    public class LoginViewModel : ObservableObject
-   {
+   { 
+     
         UserData _user;
+       
 
         public UserData User { get => _user; set => SetProperty(ref _user,value); }
 
@@ -23,6 +26,12 @@ namespace Matching_Project.ViewModel
         {
             User = new UserData();
             LoginCommand = new RelayCommand(ExecuteLoginCommand);
+            CancelCommand = new RelayCommand(ExecuteCancelCommand);
+        }
+
+        private void ExecuteCancelCommand()
+        {
+          
         }
 
         private void ExecuteLoginCommand()

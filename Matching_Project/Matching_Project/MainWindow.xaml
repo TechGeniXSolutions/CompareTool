@@ -51,14 +51,14 @@
                             <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBox Grid.Row="1" Name="txtage"  Text="{Binding CurrentItem.Age }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" BorderThickness="0,1" />
+                        <TextBox Grid.Row="1" Name="txtage"  Text="{Binding Logdata.Age }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" BorderThickness="0,1" />
 
                         <TextBlock Text="Height" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Name="txtheight" Text="{Binding CurrentItem.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                        <TextBox Grid.Column="1" Name="txtheight" Text="{Binding Logdata.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
 
                         <TextBlock Text="President" Name="txtpresident" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" />
 
-                        <TextBox Grid.Column="2" Text="{Binding CurrentItem.President }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                        <TextBox Grid.Column="2" Text="{Binding Logdata.President }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
                     </Grid>
                     <StackPanel Grid.Row="1" HorizontalAlignment="Left">
                         <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Command="{Binding LeftTableSaveCommand}"    />
@@ -128,14 +128,14 @@
                         <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="President"  VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    <TextBox Grid.Row="1"  Text="{Binding CurrentValue.President }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                    <TextBox Grid.Row="1"  Text="{Binding Logdata.President }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
 
                     <TextBlock Text="Height"  VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" />
-                    <TextBox Grid.Column="1" Text="{Binding CurrentValue.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
+                    <TextBox Grid.Column="1" Text="{Binding Logdata.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
 
                     <TextBlock Text="Age"  VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" />
 
-                    <TextBox Grid.Column="2" Text="{Binding CurrentValue.Age }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
+                    <TextBox Grid.Column="2" Text="{Binding Logdata.Age }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
 
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Right">

@@ -111,15 +111,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DAL\leftTableDAL.cs" />
-    <Compile Include="DAL\LoginFormDAL.cs" />
-    <Compile Include="DAL\RightTableDAL.cs" />
+    <Compile Include="DAL\LogDataDAL.cs" />
+    <Compile Include="DAL\LoginDAL.cs" />
     <Compile Include="DAL\SQLite.cs" />
     <Compile Include="DAL\SQLiteHelper.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\LogData.cs" />
     <Compile Include="Models\UserData.cs" />
+    <Compile Include="ViewModel\LogDataViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Views\LoginForm.xaml.cs">
