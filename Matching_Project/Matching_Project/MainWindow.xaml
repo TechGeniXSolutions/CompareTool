@@ -11,19 +11,10 @@
         Width="800" 
         WindowStartupLocation="CenterScreen" 
         WindowState="Maximized">
+   
     <Grid>
-        
-            <Grid Margin="10" >
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="60"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="1">
-                <TextBox FontWeight="Bold"   Name="errorTextBox"  Background="LightGray" Height="60" Text="{Binding SuccessMessage}" IsReadOnly="True"/>
-            </StackPanel>
-        
-        </Grid>
-        <Grid  Margin="0,0,0,60">
+       
+        <Grid  Margin="0,20,0,70">
             <!--first of all main grid is devided into two equal columns With equal width-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -35,8 +26,8 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid>
@@ -45,22 +36,35 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="40" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBox Grid.Row="1" Name="txtage"  Text="{Binding Logdata.Age }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" BorderThickness="0,1" />
+                        <StackPanel>
+                            <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <Border BorderBrush="Gray" BorderThickness="1">
+                                <TextBox  Text="{Binding CurrentLeftItem.Age }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
+                            </Border>
+                        </StackPanel>
 
-                        <TextBlock Text="Height" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Name="txtheight" Text="{Binding Logdata.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Height" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
+                                <TextBox   Text="{Binding CurrentLeftItem.Height }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            </Border>
+                        </StackPanel>
 
-                        <TextBlock Text="President" Name="txtpresident" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" />
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="President" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
+                                <TextBox   Text="{Binding CurrentLeftItem.President }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            </Border>
+                        </StackPanel>
 
-                        <TextBox Grid.Column="2" Text="{Binding Logdata.President }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                        <!--
+                        <TextBox Grid.Column="1" Name="txtheight" Text="{Binding CurrentLeftItem.Height }"  Grid.Row="1" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"  />
+
+                        
+
+                        <TextBox Grid.Column="2" Text="{Binding CurrentLeftItem.President }"  Grid.Row="1" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"  />-->
                     </Grid>
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Left">
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Left" Margin="0,10,0,0">
                         <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Command="{Binding LeftTableSaveCommand}"    />
                     </StackPanel>
 
@@ -81,7 +85,7 @@
                     Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
                             </Grid>
                             <ScrollViewer Margin="0,70,0,0">
-                                <ItemsControl Name="listItems"  ItemsSource="{Binding LeftItems ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
+                                <ItemsControl Name="listItems"  ItemsSource="{Binding LeftTable ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
@@ -112,8 +116,8 @@
             <!--column one two-->
             <Grid Grid.Column="1" Margin="10,0,10,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid>
@@ -122,24 +126,29 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="President"  VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    <TextBox Grid.Row="1"  Text="{Binding Logdata.President }"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10"  />
+                    <StackPanel>
+                        <TextBlock Text="President" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Border BorderBrush="Gray" BorderThickness="1">
+                            <TextBox  Text="{Binding CurrentRightItem.President }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
+                        </Border>
+                    </StackPanel>
 
-                    <TextBlock Text="Height"  VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" />
-                    <TextBox Grid.Column="1" Text="{Binding Logdata.Height }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Height" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
+                            <TextBox  Text="{Binding CurrentRightItem.Height }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                        </Border>
+                    </StackPanel>
 
-                    <TextBlock Text="Age"  VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" />
-
-                    <TextBox Grid.Column="2" Text="{Binding Logdata.Age }"  Grid.Row="1"  Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="10" />
-
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
+                            <TextBox  Text="{Binding CurrentRightItem.Age }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                        </Border>
+                    </StackPanel>
                 </Grid>
-                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
-                    <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Command="{Binding RightTableSaveCommand}"/>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Command="{Binding RightTableSaveCommand}"/>
                 </StackPanel>
                 <Grid Grid.Row="2">
                     <Grid Margin="0,40,0,0" VerticalAlignment="Top">
@@ -157,7 +166,7 @@
                     Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
                     </Grid>
                     <ScrollViewer Margin="0,70,0,0">
-                        <ItemsControl Name="listItem"  ItemsSource="{Binding RightItems ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
+                        <ItemsControl Name="listItem"  ItemsSource="{Binding RightTable ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -184,7 +193,16 @@
                 </Grid>
             </Grid>
         </Grid>
-       
 
+        <Grid Margin="10" >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1">
+                <TextBlock FontWeight="Bold"   Background="Red" Height="60" Text="{Binding SuccessMessage}" />
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>

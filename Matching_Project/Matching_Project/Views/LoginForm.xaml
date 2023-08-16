@@ -11,8 +11,8 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Enter Username/Password to Login" FontWeight="Bold" HorizontalAlignment="Center" />
                 <StackPanel Margin="0,50,0,0" Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBlock Text="{Binding User.UserName}" FontSize="16" />
-                    <TextBox Name="txtUsername" Text="{Binding User.Password}" Width="400" HorizontalContentAlignment="Center" FontSize="16" Style="{StaticResource MaterialDesignFilledTextBox}" />
+                    <TextBlock FontSize="16" />
+                    <TextBox Name="txtUsername" Width="400" HorizontalContentAlignment="Center" FontSize="16" Style="{StaticResource MaterialDesignFilledTextBox}" />
                 </StackPanel>
                 <StackPanel Margin="0,30,0,0" Orientation="Vertical" HorizontalAlignment="Center">
                     <TextBlock Text="Password:" FontSize="16" />
@@ -23,8 +23,8 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Button Content="Login" FontSize="12" Command="{Binding LoginCommand }"  HorizontalAlignment="Left" Click="Button_Click_1" />
-                    <Button Content="Cancel" FontSize="12" Command="{Binding CancelCommand}" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click" HorizontalAlignment="Right" />
+                    <Button Content="Login" FontSize="12" HorizontalAlignment="Left" Name="btnLogin" Click="btnLogin_Click" />
+                    <Button Content="Cancel" FontSize="12" Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnCancel" Click="btnCancel_Click" HorizontalAlignment="Right" />
                 </Grid>
             </StackPanel>
         </Grid>

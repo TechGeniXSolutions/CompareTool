@@ -1,5 +1,6 @@
 ﻿using Matching_Project.DAL;
 using Matching_Project.Models;
+using Matching_Project.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -23,7 +24,7 @@ namespace Matching_Project.Views
     /// </summary>
     public partial class LoginForm : Window
     {
-        LoginFormDAL fm = new LoginFormDAL();
+        UserDAL dal = new UserDAL();
 
         public bool isCancelled;
         public bool userAuthenticated;
@@ -33,55 +34,28 @@ namespace Matching_Project.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            isCancelled = true;
-            this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            // isCancelled = false;
-
-            //if (txtUsername.Text.ToString().Equals("Admin"))
-            //{
-            //    if (txtPassword.Password.ToString().Equals("Admin"))
-            //        userAuthenticated = true;
-            //    else
-            //    {
-            //        MessageBox.Show("Invalid Password");
-            //        txtPassword.Password = "";
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Invalid Username/Password");
-            //    txtUsername.Text = "";
-            //    txtPassword.Password = "";
-            //}
-
-            //    if (userAuthenticated)
-            //        this.Close();
-            //}
             string username = txtUsername.Text;
             string password = txtPassword.Password;
 
-            LoginFormDAL fm = new LoginFormDAL();
-            List<LoginFormData> users = fm.Read(new LoginFormData());
-
-            foreach (var user in users)
+            var user = dal.Login(username, password);
+            if (user != null)
             {
-
-                if (user.UserName == username && user.Password == password)
-                {
-                    MessageBox.Show("Login successful");
-                    userAuthenticated = true;
-                    this.Close();
-                    return;
-                }
+                MessageBox.Show("Login successful");
+                userAuthenticated = true;
+                this.Close();
+                return;
             }
 
             MessageBox.Show("Invalid Username/Password");
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            isCancelled = true;
+            this.Close();
         }
     }
     }

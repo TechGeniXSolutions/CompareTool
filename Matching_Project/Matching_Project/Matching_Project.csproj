@@ -112,7 +112,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\LogDataDAL.cs" />
-    <Compile Include="DAL\LoginDAL.cs" />
+    <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="DAL\SQLite.cs" />
     <Compile Include="DAL\SQLiteHelper.cs" />
     <Compile Include="Globals.cs" />

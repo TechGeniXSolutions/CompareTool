@@ -89,6 +89,22 @@ namespace Matching_Project.DAL
                 return null;
             }
         }
+        public bool DeleteEntryFromLogDAL(LogData entryToDelete)
+        {
+            try
+            {
+                Dictionary<string, object> _filters = new Dictionary<string, object>();
+                _filters.Add("ID", entryToDelete.ID);
 
+                int numRowsDeleted = SQLite.Delete<LogData>(_filters);
+
+                return numRowsDeleted > 0;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately, e.g., log the error
+                return false;
+            }
+        }
     }
 }
