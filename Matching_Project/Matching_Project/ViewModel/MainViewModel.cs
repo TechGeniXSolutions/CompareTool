@@ -19,26 +19,26 @@ namespace Matching_Project.ViewModel
     public class MainViewModel : ObservableObject
     {
         LogDataDAL logDAL;
-      private  LogData _currentLeftItem;
-      private  LogData _currentRightItem;
+        private LogData _currentLeftItem;
+        private LogData _currentRightItem;
 
-      private  ObservableCollection<LogData> _leftTable;
-      private  ObservableCollection<LogData> _rightTable;
+        private ObservableCollection<LogData> _leftTable;
+        private ObservableCollection<LogData> _rightTable;
 
-        public LogData CurrentLeftItem { get=>_currentLeftItem; set=>SetProperty(ref _currentLeftItem,value); }
-        public LogData CurrentRightItem { get=>_currentRightItem; set=>SetProperty(ref _currentRightItem,value); }
+        public LogData CurrentLeftItem { get => _currentLeftItem; set => SetProperty(ref _currentLeftItem, value); }
+        public LogData CurrentRightItem { get => _currentRightItem; set => SetProperty(ref _currentRightItem, value); }
 
-        public ObservableCollection<LogData> LeftTable { get=>_leftTable; set=>SetProperty(ref _leftTable,value); }
-        public ObservableCollection<LogData> RightTable { get=>_rightTable; set=>SetProperty(ref _rightTable,value); }
+        public ObservableCollection<LogData> LeftTable { get => _leftTable; set => SetProperty(ref _leftTable, value); }
+        public ObservableCollection<LogData> RightTable { get => _rightTable; set => SetProperty(ref _rightTable, value); }
 
-        private string _successMessage;
-        public string SuccessMessage
+        private ObservableCollection<string> _messages = new ObservableCollection<string>();
+        public ObservableCollection<string> Messages
         {
-            get => _successMessage;
-            set => SetProperty(ref _successMessage, value);
+            get => _messages;
+            set => SetProperty(ref _messages, value);
         }
 
-      
+
         public ICommand LeftTableSaveCommand { get; set; }
         public ICommand LeftTableDeleteCommand { get; set; }
         public ICommand RightTableSaveCommand { get; set; }
@@ -56,12 +56,10 @@ namespace Matching_Project.ViewModel
 
             LeftTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteLeftTableDeleteCommand));
             RightTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteRightTableDeleteCommand));
-            
-            logDAL = new LogDataDAL();
-            
 
-            
-            
+            logDAL = new LogDataDAL();
+
+
             SQLiteHelper.CreateTableIfNotExist<UserData>(new UserData());
             SQLiteHelper.CreateTableIfNotExist<LogData>(new LogData());
 
@@ -75,97 +73,78 @@ namespace Matching_Project.ViewModel
             }
 
         }
-
         private void ExecuteRightTableSaveCommand()
         {
+            //int totalRightRows = RightTable.Count();
+            int totalLeftRows = LeftTable.Count();
 
-            if (CurrentRightItem.ID <= 0)
+            if (totalLeftRows <= 0)
             {
-                int totalRightRows = RightTable.Count();
-                int totalLeftRows = LeftTable.Count();
-                if (totalLeftRows <= totalRightRows)
-                {
-                    MessageBox.Show("Not enough Rows to compare");
-                    return;
-                }
-
-                var leftrow = LeftTable[totalRightRows];
-
-                if (leftrow.Age == CurrentRightItem.Age && leftrow.President == CurrentRightItem.President)
-                {
-                    if (leftrow.Height == CurrentRightItem.Height)
-                    {
-                        // remove row from right column
-
-
-                       // LeftTable.RemoveAt(totalRightRows);
-                        // Remove row from left table
-                        LeftTable.RemoveAt(totalRightRows);
-
-                        // Delete corresponding entry from logDAL
-                        logDAL.DeleteEntryFromLogDAL(leftrow); // 
-                        SuccessMessage = "both tables have same height";
-
-                        // Delete corresponding entry from logDAL
-                       
-
-                    }
-                    else
-                    {
-                        int diff = leftrow.Height - CurrentRightItem.Height;
-                        diff = Math.Abs(diff);
-                        if (diff == 1)
-                        {
-                            SuccessMessage = "difference is one";
-                        }
-                        else
-                        {
-                            //save row data in righttable
-<<<<<<< Updated upstream
-                          
-=======
-                            tableRight.Create(CurrentValue);
->>>>>>> Stashed changes
-                        }
-                    }
-                }
-                else
-                {
-                    CurrentRightItem.IsLeft = false;
-                    var save = logDAL.Create(CurrentRightItem);
-                    if (save)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            MessageBox.Show(SuccessMessage = "Data added successfully");
-                        });
-                        RightTable.Add(CurrentRightItem);
-                        ClearField();
-                    }
-                    else
-                    {
-                        SuccessMessage = "Failed to save";
-                    }
-                }
+                MessageBox.Show("Not enough Rows to compare");
+                return;
             }
 
-        }
+            // Check if the data already exists in RightTable
+            var matchingRightRow = RightTable.FirstOrDefault(item =>
+                item.Age == CurrentRightItem.Age &&
+                item.President == CurrentRightItem.President &&
+                item.Height == CurrentRightItem.Height);
 
+            if (matchingRightRow != null)
+            {
+                Messages.Add("same data is already exists");
+                return;
+            }
+
+            var matchingLeftRow = LeftTable.FirstOrDefault(item =>
+                    item.Age == CurrentRightItem.Age &&
+                    item.President == CurrentRightItem.President);
+
+            if (matchingLeftRow != null)
+            {
+                var diff = Math.Abs(matchingLeftRow.Height - CurrentRightItem.Height);
+                if (diff == 1)
+                {
+                    Messages.Add(String.Format("President:{0}, Age{1}, Height Difference is {2}", CurrentRightItem.President, CurrentRightItem.Age, diff));
+                }
+                else if (diff == 0)
+                {
+                    // Remove matching row
+                    LeftTable.Remove(matchingLeftRow);
+                    logDAL.DeleteEntryFromLogDAL(matchingLeftRow);
+                    Messages.Add("Matching data found");
+                    return;
+                }
+            }
+                
+
+            CurrentRightItem.IsLeft = false;
+            var save = logDAL.Create(CurrentRightItem);
+            if (save)
+            {
+                RightTable.Add(CurrentRightItem);
+                ClearField();
+            }
+            else
+            {
+                Messages.Add("Failed to save");
+            }
+        }
 
         private void ExecuteRightTableDeleteCommand(object obj)
         {
             CurrentRightItem = (LogData)obj;
 
-          
-                var deleted = logDAL.Delete(CurrentRightItem.ID);
-                if (deleted)
-                {
-                    logDAL.Update(CurrentRightItem);
-                    MessageBox.Show("record is deleted successfully");
-                    ClearField();
-                }
 
-            
+            var deleted = logDAL.Delete(CurrentRightItem.ID);
+            if (deleted)
+            {
+                logDAL.Update(CurrentRightItem);
+                Messages.Add("record is deleted successfully");
+                ClearField();
+            }
+
+
             else
 
             {
@@ -203,14 +182,15 @@ namespace Matching_Project.ViewModel
             }
 
         }
-
+   
         private void ExecuteLeftTableSaveCommand()
         {
             if (LeftTable.Any(item => item.Age == CurrentLeftItem.Age && item.Height == CurrentLeftItem.Height && item.President == CurrentLeftItem.President))
             {
-                SuccessMessage = "Invalid: Duplicate data is not allowed";
+                Messages.Add("Invalid: Duplicate data is not allowed");
                 
             }
+            
             else
             {
                 CurrentLeftItem.IsLeft = true;
@@ -223,7 +203,7 @@ namespace Matching_Project.ViewModel
                 }
                 else
                 {
-                    SuccessMessage = "Failed to save";
+                    Messages.Add("Failed to save");
                     ClearField();
                 }
             }
@@ -232,7 +212,7 @@ namespace Matching_Project.ViewModel
         {
             CurrentLeftItem = new LogData();
             CurrentRightItem = new LogData();
-            SuccessMessage = string.Empty;
+          
         }
     }
 }
