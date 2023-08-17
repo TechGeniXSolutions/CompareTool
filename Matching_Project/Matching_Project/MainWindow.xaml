@@ -65,7 +65,7 @@
                         <TextBox Grid.Column="2" Text="{Binding CurrentLeftItem.President }"  Grid.Row="1" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"  />-->
                     </Grid>
                     <StackPanel Grid.Row="1" HorizontalAlignment="Left" Margin="0,10,0,0">
-                        <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Command="{Binding LeftTableSaveCommand}"    />
+                        <Button Content="Submit" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding LeftTableSaveCommand}"  Width="200"  />
                     </StackPanel>
 
                     <Grid Grid.Row="2">
@@ -148,7 +148,7 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
-                    <Button   Content="Submit" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Command="{Binding RightTableSaveCommand}"/>
+                    <Button   Content="Submit" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding RightTableSaveCommand}" Width="200"/>
                 </StackPanel>
                 <Grid Grid.Row="2">
                     <Grid Margin="0,40,0,0" VerticalAlignment="Top">
@@ -199,9 +199,9 @@
                 <RowDefinition />
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="1">
-                <TextBlock FontWeight="Bold"   Background="Red" Height="60" Text="{Binding SuccessMessage}" />
-            </StackPanel>
+            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+                <TextBlock FontWeight="Bold"  Height="100" Text="{Binding SuccessMessage}" Background="Silver" />
+            </Border>
 
         </Grid>
     </Grid>
