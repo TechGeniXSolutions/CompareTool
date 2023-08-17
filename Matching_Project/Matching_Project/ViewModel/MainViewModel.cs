@@ -121,7 +121,11 @@ namespace Matching_Project.ViewModel
                         else
                         {
                             //save row data in righttable
+<<<<<<< Updated upstream
                           
+=======
+                            tableRight.Create(CurrentValue);
+>>>>>>> Stashed changes
                         }
                     }
                 }
