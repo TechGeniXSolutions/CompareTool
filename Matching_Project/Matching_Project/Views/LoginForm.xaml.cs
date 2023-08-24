@@ -43,13 +43,13 @@ namespace Matching_Project.Views
             var user = dal.Login(username, password);
             if (user != null)
             {
-                MessageBox.Show("Login successful");
+              
                 userAuthenticated = true;
                 this.Close();
                 return;
             }
 
-            MessageBox.Show("Invalid Username/Password");
+           // MessageBox.Show("Invalid Username/Password");
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

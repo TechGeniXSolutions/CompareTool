@@ -57,5 +57,37 @@ namespace Matching_Project
                 }
             }
         }
+
+        private void txtLeftAge_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtLeftAge.SelectAll();
+        }
+
+        private void txtLeftHeight_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtLeftHeight.SelectAll();
+        }
+
+      
+
+        private void txtLeftPresident_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtLeftPresident.SelectAll();
+        }
+
+        private void txtRightPresident_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtRightPresident.SelectAll();
+        }
+
+        private void txtRightHight_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtRightHight.SelectAll();
+        }
+
+        private void txtRightAge_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtRightAge.SelectAll();
+        }
     }
 }

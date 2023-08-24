@@ -39,21 +39,21 @@
                         <StackPanel>
                             <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" />
                             <Border BorderBrush="Gray" BorderThickness="1">
-                                <TextBox  Text="{Binding CurrentLeftItem.Age }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
+                                <TextBox Name="txtLeftAge"  Text="{Binding CurrentLeftItem.Age }" GotFocus="txtLeftAge_GotFocus" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
                             </Border>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Height" VerticalAlignment="Center"  HorizontalAlignment="Center" />
                             <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
-                                <TextBox   Text="{Binding CurrentLeftItem.Height }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                                <TextBox Name="txtLeftHeight"  GotFocus="txtLeftHeight_GotFocus" Text="{Binding CurrentLeftItem.Height }" TextAlignment="Center"                                                                                                            Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
                             </Border>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
                             <TextBlock Text="President" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
                             <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
-                                <TextBox   Text="{Binding CurrentLeftItem.President }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                                <TextBox Name="txtLeftPresident"  Text="{Binding CurrentLeftItem.President }" GotFocus="txtLeftPresident_GotFocus" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
                             </Border>
                         </StackPanel>
 
@@ -98,7 +98,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"   >
                                                     <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{Binding ElementName=listItems, Path=DataContext.LeftTableEditCommand}" CommandParameter="{Binding}"/>
+                                        Command="{Binding ElementName=listItems, Path=DataContext.LeftTableCopyCommand}" CommandParameter="{Binding}"/>
                                                     <Button Content="Delete" FontSize="10" Style="{StaticResource MaterialDesignFlatAccentButton}" CommandParameter="{Binding}"
                                         Command="{Binding ElementName=listItems, Path=DataContext.LeftTableDeleteCommand}"/>
                                                 </StackPanel>
@@ -131,21 +131,21 @@
                     <StackPanel>
                         <TextBlock Text="President" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Border BorderBrush="Gray" BorderThickness="1">
-                            <TextBox  Text="{Binding CurrentRightItem.President }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
+                            <TextBox  Name="txtRightPresident" GotFocus="txtRightPresident_GotFocus" Text="{Binding CurrentRightItem.President }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
                         </Border>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
                         <TextBlock Text="Height" VerticalAlignment="Center"  HorizontalAlignment="Center" />
                         <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
-                            <TextBox  Text="{Binding CurrentRightItem.Height }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            <TextBox Name="txtRightHight"  GotFocus="txtRightHight_GotFocus" Text="{Binding CurrentRightItem.Height }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
                         </Border>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
                         <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
-                            <TextBox  Text="{Binding CurrentRightItem.Age }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            <TextBox Name="txtRightAge"  GotFocus="txtRightAge_GotFocus" Text="{Binding CurrentRightItem.Age }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
                         </Border>
                     </StackPanel>
                 </Grid>
@@ -183,7 +183,7 @@
                                         <TextBlock Text="{Binding Age}" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" />
                                         <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right"  >
                                             <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{Binding ElementName=listItem, Path=DataContext.RightTableEditCommand}" CommandParameter="{Binding}"/>
+                                        Command="{Binding ElementName=listItem, Path=DataContext.RightTableCopyCommand}" CommandParameter="{Binding}"/>
                                             <Button Content="Delete" FontSize="10" Style="{StaticResource MaterialDesignFlatAccentButton}" CommandParameter="{Binding}"
                                         Command="{Binding ElementName=listItem, Path=DataContext.RightTableDeleteCommand}"/>
                                         </StackPanel>
