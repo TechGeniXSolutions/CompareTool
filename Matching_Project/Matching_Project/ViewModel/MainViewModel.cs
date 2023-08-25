@@ -57,8 +57,8 @@ namespace Matching_Project.ViewModel
             RightTableSaveCommand = new RelayCommand(ExecuteRightTableSaveCommand);
             //RightTableCopyCommand = new RelayCommand(ExecuteRightTableCopyCommand);
             //LeftTableCopyCommand = new RelayCommand(ExecuteLeftTableCopyCommand);
-           // LeftTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteLeftTableDeleteCommand));
-           // RightTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteRightTableDeleteCommand));
+            LeftTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteLeftTableDeleteCommand));
+            RightTableDeleteCommand = new RelayCommand<object>(new Action<object>(ExecuteRightTableDeleteCommand));
 
             logDAL = new LogDataDAL();
 
@@ -77,39 +77,7 @@ namespace Matching_Project.ViewModel
 
         }
 
-        //private void ExecuteLeftTableCopyCommand()
-        //{
-        //    StringBuilder copyData = new StringBuilder();
-        //    // Adding header row
-        //    copyData.AppendLine("Age\tHeight\tPresident");
-
-        //    foreach (var item in LeftTable)
-        //    {
-        //        copyData.AppendLine($"{item.Age}\t{item.Height}\t{item.President}");
-
-        //    }
-
-        //    Clipboard.SetText(copyData.ToString(), TextDataFormat.Text);
-
-        //    Messages.Add("data copied successfully");
-        //}
-
-        //private void ExecuteRightTableCopyCommand()
-        //{
-        //    StringBuilder copyData = new StringBuilder();
-        //    // Adding header row
-        //    copyData.AppendLine("President\tHeight\tAge");
-
-        //    foreach (var leftTableItem in RightTable)
-        //    {
-        //        copyData.AppendLine($"{leftTableItem.Age}\t{leftTableItem.Height}\t{leftTableItem.President}");
-
-        //    }
-
-        //    Clipboard.SetText(copyData.ToString(), TextDataFormat.Text);
-
-        //    Messages.Add("data copied successfully");
-        //}
+       
 
         private void ExecuteRightTableSaveCommand()
         {
@@ -169,51 +137,51 @@ namespace Matching_Project.ViewModel
             }
         }
 
-        //private void ExecuteRightTableDeleteCommand(object obj)
-        //{
-        //    CurrentRightItem = (LogData)obj;
+        private void ExecuteRightTableDeleteCommand(object obj)
+        {
+            CurrentRightItem = (LogData)obj;
 
 
-        //    var deleted = logDAL.Delete(CurrentRightItem.ID);
-        //    if (deleted)
-        //    {
-        //        logDAL.Update(CurrentRightItem);
-        //       // Messages.Add("record is deleted successfully");
-        //        ClearField();
-        //    }
+            var deleted = logDAL.Delete(CurrentRightItem.ID);
+            if (deleted)
+            {
+                logDAL.Update(CurrentRightItem);
+                // Messages.Add("record is deleted successfully");
+                ClearField();
+            }
 
 
-        //    else
+            else
 
-        //    {
-        //        MessageBox.Show("failed to process your Action");
-        //    }
-        //}
+            {
+                MessageBox.Show("failed to process your Action");
+            }
+        }
 
-      
-        //private void ExecuteLeftTableDeleteCommand(object obj)
-        //{
-        //    CurrentLeftItem = (LogData)obj;
 
-           
+        private void ExecuteLeftTableDeleteCommand(object obj)
+        {
+            CurrentLeftItem = (LogData)obj;
 
-        //        var deleted = logDAL.Delete(CurrentLeftItem.ID);
-        //        if (deleted)
-        //        {
-                
-        //            logDAL.Update(CurrentLeftItem);
-        //           // MessageBox.Show("record is deleted successfully");
-        //            ClearField();
-        //        }
 
-            
-        //    else
-        //    {
-        //        MessageBox.Show("failed to process your Action");
-        //    }
 
-        //}
-   
+            var deleted = logDAL.Delete(CurrentLeftItem.ID);
+            if (deleted)
+            {
+
+                logDAL.Update(CurrentLeftItem);
+                // MessageBox.Show("record is deleted successfully");
+                ClearField();
+            }
+
+
+            else
+            {
+                MessageBox.Show("failed to process your Action");
+            }
+
+        }
+
         private void ExecuteLeftTableSaveCommand()
         {
             if (LeftTable.Any(item => item.Age == CurrentLeftItem.Age && item.Height == CurrentLeftItem.Height && item.President == CurrentLeftItem.President))
