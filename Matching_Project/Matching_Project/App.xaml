@@ -11,7 +11,41 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Red.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="TextBox" x:Key="InputTextBox">
+                <Setter Property="FontFamily" Value="Poppins" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="33" />
+                <Setter Property="BorderThickness" Value="0" />
+                
+            </Style>
+
+
+            <Style TargetType="Label" x:Key="InputLabel">
+                <Setter Property="FontFamily" Value="Poppins" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="3" />
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="TableHeaders">
+                <Setter Property="FontFamily" Value="poppins" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="TableContent">
+                <Setter Property="FontFamily" Value="poppins" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            
         </ResourceDictionary>
-       
+
+        
     </Application.Resources>
 </Application>

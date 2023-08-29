@@ -4,27 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Matching_Project.Views"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="LoginForm" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
-    <Border Background="WhiteSmoke">
+        Title="LoginForm" 
+        Height="450" Width="600" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Loaded="Window_Loaded"
+        ResizeMode="NoResize">
+    <Border Background="LightGray" BorderBrush="Black" BorderThickness="2" CornerRadius="10">
         <Grid Margin="20">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="President" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="President" Style="{StaticResource TableHeaders}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" />
                 <StackPanel Margin="0,50,0,0" Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBlock FontSize="16" />
-                    <TextBox Name="txtUsername" Width="400" HorizontalContentAlignment="Center" FontSize="16" Style="{StaticResource MaterialDesignFilledTextBox}" />
+                    <TextBox Name="txtUsername" Width="400"
+                             Background="White"
+                             FontSize="16" 
+                             md:HintAssist.Hint="Enter Username"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                 </StackPanel>
                 <StackPanel Margin="0,30,0,0" Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBlock Text="Password:" FontSize="16" />
-                    <PasswordBox Name="txtPassword" Width="400" HorizontalContentAlignment="Center" FontSize="16" Style="{StaticResource MaterialDesignFilledPasswordBox}" />
+                    <PasswordBox Name="txtPassword" Width="400" 
+                                 FontSize="16" 
+                                 Background="White"
+                                 md:HintAssist.Hint="Enter Password"
+                                 Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
                 </StackPanel>
                 <Grid Margin="0,50,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Button Content="Login" FontSize="12" HorizontalAlignment="Left" Name="btnLogin" Click="btnLogin_Click" />
-                    <Button Content="Cancel" FontSize="12" Style="{StaticResource MaterialDesignRaisedAccentButton}" Name="btnCancel" Click="btnCancel_Click" HorizontalAlignment="Right" />
+                    <Button Content="Login"
+                            FontSize="14" 
+                            HorizontalAlignment="Left" 
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Width="180" Height="40"
+                            Name="btnLogin" 
+                            Click="btnLogin_Click" />
+                    <Button Content="Cancel" 
+                            FontSize="14" 
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}" 
+                            Name="btnCancel" Click="btnCancel_Click" 
+                            Width="180" Height="40"
+                            HorizontalAlignment="Right" />
                 </Grid>
             </StackPanel>
         </Grid>

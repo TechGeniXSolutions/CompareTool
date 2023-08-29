@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Matching_Project"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
@@ -14,15 +15,15 @@
    
     <Grid>
        
-        <Grid  Margin="0,20,0,70">
+        <Grid Margin="0,0,0,200">
             <!--first of all main grid is devided into two equal columns With equal width-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <!--column one grid-->
-            <Grid Grid.Column="0" Margin="10,0,10,0">
+            <!--left side-->
+            <Grid Grid.Column="0" Margin="10,10,10,120">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -32,79 +33,86 @@
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                            <Border BorderBrush="Gray" BorderThickness="1">
-                                <TextBox Name="txtLeftAge"  Text="{Binding CurrentLeftItem.Age }" GotFocus="txtLeftAge_GotFocus" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
-                            </Border>
-                        </StackPanel>
 
+                        <Button Content="Submit" Style="{StaticResource MaterialDesignOutlinedButton}" Command="{Binding LeftTableSaveCommand}" 
+                                Margin="0,10,5,0" 
+                                Height="36"
+                                VerticalAlignment="Bottom" />
+                        
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="Height" VerticalAlignment="Center"  HorizontalAlignment="Center" />
-                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
-                                <TextBox Name="txtLeftHeight"  GotFocus="txtLeftHeight_GotFocus" Text="{Binding CurrentLeftItem.Height }" TextAlignment="Center"                                                                                                            Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            
+                            <Label Content="Age" Style="{StaticResource InputLabel}" />
+                            <Border BorderBrush="Gray" BorderThickness="1">
+                                <TextBox Name="txtLeftAge" Text="{Binding CurrentLeftItem.Age }"
+                                         GotFocus="txtLeftAge_GotFocus" 
+                                         Style="{StaticResource InputTextBox}" />
                             </Border>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
-                            <TextBlock Text="President" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
-                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
-                                <TextBox Name="txtLeftPresident"  Text="{Binding CurrentLeftItem.President }" GotFocus="txtLeftPresident_GotFocus" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            <Label Content="Height" Style="{StaticResource InputLabel}" />
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
+                                <TextBox Name="txtLeftHeight" 
+                                         GotFocus="txtLeftHeight_GotFocus" 
+                                         Text="{Binding CurrentLeftItem.Height }"
+                                         Style="{StaticResource InputTextBox}" />
                             </Border>
                         </StackPanel>
 
-                        <!--
-                        <TextBox Grid.Column="1" Name="txtheight" Text="{Binding CurrentLeftItem.Height }"  Grid.Row="1" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"  />
+                        <StackPanel Grid.Column="3">
+                            <Label Content="President" Style="{StaticResource InputLabel}" />
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
+                                <TextBox Name="txtLeftPresident" 
+                                         Text="{Binding CurrentLeftItem.President }" 
+                                         GotFocus="txtLeftPresident_GotFocus" 
+                                         Style="{StaticResource InputTextBox}" />
+                            </Border>
+                        </StackPanel>
 
-                        
-
-                        <TextBox Grid.Column="2" Text="{Binding CurrentLeftItem.President }"  Grid.Row="1" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"  />-->
                     </Grid>
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Left" Margin="0,10,0,0">
-                        <Button Content="Submit" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding LeftTableSaveCommand}"  Width="200"  />
-                    </StackPanel>
+                    
 
                     <Grid Grid.Row="2">
                         <Grid>
-                            <Grid Margin="0,40,0,0" VerticalAlignment="Top">
+                            <Grid Margin="0,40,20,0" VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="130"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Action"  FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" />
-                                <TextBlock Text="Age" Grid.Column="1" FontWeight="Bold"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                                <TextBlock Text="Height" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Center"   VerticalAlignment="Center"   />
-                                <TextBlock Text="President" Grid.Column="3" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Action" Style="{StaticResource TableHeaders}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="Age" Grid.Column="1" Style="{StaticResource TableHeaders}"/>
+                                <TextBlock Text="Height" Grid.Column="2" Style="{StaticResource TableHeaders}" />
+                                <TextBlock Text="President" Grid.Column="3" Style="{StaticResource TableHeaders}" HorizontalAlignment="Right"/>
                                 
-                                <Border BorderBrush="Gray" BorderThickness="0,0,0,1"
-                    Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
+                                <Border BorderBrush="Gray" BorderThickness="0,0,0,1" Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
                             </Grid>
-                            <ScrollViewer Margin="0,70,0,0">
-                                <ItemsControl Name="listItems"  ItemsSource="{Binding LeftTable ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
+                            <ScrollViewer Margin="0,60,0,0">
+                                <ItemsControl Name="listItems" Margin="0,0,20,0" ItemsSource="{Binding LeftTable ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="250"/>
+                                                    <ColumnDefinition Width="130"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="100"/>
                                                     <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="3*"/>
-                                                    <ColumnDefinition Width="1*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left"   >
-                                                    <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{Binding ElementName=listItems, Path=DataContext.LeftTableCopyCommand}" CommandParameter="{Binding}"/>
+                                                    <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"                                                            
+                                                            Command="{Binding ElementName=listItems, Path=DataContext.LeftTableCopyCommand}" CommandParameter="{Binding}"/>
                                                     <Button Content="Delete" FontSize="10" Style="{StaticResource MaterialDesignFlatAccentButton}" CommandParameter="{Binding}"
-                                        Command="{Binding ElementName=listItems, Path=DataContext.LeftTableDeleteCommand}"/>
+                                                            Command="{Binding ElementName=listItems, Path=DataContext.LeftTableDeleteCommand}"/>
                                                 </StackPanel>
-                                                <TextBlock Text="{Binding Age}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-                                                <TextBlock Text="{Binding Height}" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" />
-                                                <TextBlock Text="{Binding President}" Grid.Column="3" HorizontalAlignment="Center"   VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding Age}" Grid.Column="1" Style="{StaticResource TableContent}"  />
+                                                <TextBlock Text="{Binding Height}" Grid.Column="2" Style="{StaticResource TableContent}" />
+                                                <TextBlock Text="{Binding President}" Grid.Column="3" Style="{StaticResource TableContent}" HorizontalAlignment="Right" />
                                                
                                             </Grid>
                                         </DataTemplate>
@@ -115,8 +123,9 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <!--column one two-->
-            <Grid Grid.Column="1" Margin="10,0,10,0">
+            
+            <!--right side-->
+            <Grid Grid.Column="1" Margin="10,10,10,120">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto"/>
@@ -124,68 +133,85 @@
                 </Grid.RowDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
+                    
                     <StackPanel>
-                        <TextBlock Text="President" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Label Content="President" Style="{StaticResource InputLabel}" />
                         <Border BorderBrush="Gray" BorderThickness="1">
-                            <TextBox  Name="txtRightPresident" GotFocus="txtRightPresident_GotFocus" Text="{Binding CurrentRightItem.President }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5"/>
+                            <TextBox  Name="txtRightPresident" 
+                                      GotFocus="txtRightPresident_GotFocus" 
+                                      Text="{Binding CurrentRightItem.President }" 
+                                      Style="{StaticResource InputTextBox}" />
                         </Border>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
-                        <TextBlock Text="Height" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                        <Label Content="Height" Style="{StaticResource InputLabel}" />
                         <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1">
-                            <TextBox Name="txtRightHight"  GotFocus="txtRightHight_GotFocus" Text="{Binding CurrentRightItem.Height }" TextAlignment="Center" Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            <TextBox Name="txtRightHight" 
+                                     GotFocus="txtRightHight_GotFocus" 
+                                     Text="{Binding CurrentRightItem.Height }" 
+                                     Style="{StaticResource InputTextBox}" />
                         </Border>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
-                        <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" />
+                        <Label Content="Age" Style="{StaticResource InputLabel}" />
                         <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
-                            <TextBox Name="txtRightAge"  GotFocus="txtRightAge_GotFocus" Text="{Binding CurrentRightItem.Age }" TextAlignment="Center"  Style="{StaticResource MaterialDesignTextBox}" BorderThickness="0" Padding="5" />
+                            <TextBox Name="txtRightAge" 
+                                     GotFocus="txtRightAge_GotFocus" 
+                                     Text="{Binding CurrentRightItem.Age }" 
+                                     Style="{StaticResource InputTextBox}" />
                         </Border>
                     </StackPanel>
+
+                    <Button Content="Submit" Grid.Column="3"
+                            Margin="10,0,0,0" 
+                                Height="36"
+                                VerticalAlignment="Bottom"
+                            Style="{StaticResource MaterialDesignOutlinedButton}" 
+                            Command="{Binding RightTableSaveCommand}" />
+                    
                 </Grid>
-                <StackPanel Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
-                    <Button   Content="Submit" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding RightTableSaveCommand}" Width="200"/>
-                </StackPanel>
+                
                 <Grid Grid.Row="2">
-                    <Grid Margin="0,40,0,0" VerticalAlignment="Top">
+                    <Grid Margin="0,40,30,0" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="130"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="President" FontWeight="Bold"  HorizontalAlignment="Left"  VerticalAlignment="Center"/>
-                        <TextBlock Text="Height" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Center"   VerticalAlignment="Center"   />
-                        <TextBlock Text="Age" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="Action" Grid.Column="3" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,60,0" />
+                        <TextBlock Text="President" Style="{StaticResource TableHeaders}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Height" Grid.Column="1" Style="{StaticResource TableHeaders}"/>
+                        <TextBlock Text="Age" Grid.Column="2" Style="{StaticResource TableHeaders}"/>
+                        <TextBlock Text="Action" Grid.Column="3" Style="{StaticResource TableHeaders}" />
                         <Border BorderBrush="Gray" BorderThickness="0,0,0,1"
                     Grid.ColumnSpan="4" VerticalAlignment="Bottom"/>
                     </Grid>
                     <ScrollViewer Margin="0,70,0,0">
-                        <ItemsControl Name="listItem"  ItemsSource="{Binding RightTable ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
+                        <ItemsControl Name="listItem" Margin="0,0,20,0"  ItemsSource="{Binding RightTable ,Mode=TwoWay, NotifyOnSourceUpdated=True}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="3*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="250"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="130"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding President}" HorizontalAlignment="Left" VerticalAlignment="Center"  />
-                                        <TextBlock Text="{Binding Height}" Grid.Column="1" HorizontalAlignment="Center"   VerticalAlignment="Center" />
-                                        <TextBlock Text="{Binding Age}" Grid.Column="2" HorizontalAlignment="Center"   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding President}" Style="{StaticResource TableContent}" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Height}" Grid.Column="1" Style="{StaticResource TableContent}" />
+                                        <TextBlock Text="{Binding Age}" Grid.Column="2" Style="{StaticResource TableContent}" />
                                         <StackPanel Orientation="Horizontal" Grid.Column="3" HorizontalAlignment="Right"  >
                                             <Button Content="Copy" FontSize="10" Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{Binding ElementName=listItem, Path=DataContext.RightTableCopyCommand}" CommandParameter="{Binding}"/>
+                                                    Command="{Binding ElementName=listItem, Path=DataContext.RightTableCopyCommand}" CommandParameter="{Binding}"/>
                                             <Button Content="Delete" FontSize="10" Style="{StaticResource MaterialDesignFlatAccentButton}" CommandParameter="{Binding}"
-                                        Command="{Binding ElementName=listItem, Path=DataContext.RightTableDeleteCommand}"/>
+                                                    Command="{Binding ElementName=listItem, Path=DataContext.RightTableDeleteCommand}"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -196,16 +222,12 @@
             </Grid>
         </Grid>
 
-        <Grid Margin="10" >
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+        <Grid Margin="10" VerticalAlignment="Bottom" Height="200" >
             <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
-                <ListBox Height="100" ItemsSource="{Binding Messages}" Background="Silver">
+                <ListBox ItemsSource="{Binding Messages}" Background="LightGray">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock FontWeight="Bold" Text="{Binding}" />
+                            <TextBlock FontFamily="Poppins" Text="{Binding}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

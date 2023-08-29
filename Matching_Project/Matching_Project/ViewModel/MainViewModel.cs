@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using Usman.CodeBlocks.SQLiteManager;
 
 namespace Matching_Project.ViewModel
@@ -77,18 +78,82 @@ namespace Matching_Project.ViewModel
 
         }
 
-       
+        private void ExecuteLeftTableSaveCommand()
+        {
+
+            if (CurrentLeftItem.Age == 0 || CurrentLeftItem.Height == 0 || string.IsNullOrEmpty(CurrentLeftItem.President))
+            {
+                Messages.Insert(0, "Invalid Data at Left");
+                return;
+
+            }
+
+            // Check if the data already exists in RightTable
+            var duplicate = LeftTable.FirstOrDefault(item =>
+                item.Age == CurrentRightItem.Age &&
+                item.President == CurrentRightItem.President &&
+                item.Height == CurrentRightItem.Height);
+
+            if (duplicate != null)
+            {
+                Messages.Insert(0, "same data is already exists");
+                return;
+            }
+
+            // 1.match left table data
+            var matchingRightRow = RightTable.FirstOrDefault(item =>
+                    item.Age == CurrentLeftItem.Age &&
+                    item.Height == CurrentLeftItem.Height &&
+                    item.President == CurrentLeftItem.President);
+
+            if (matchingRightRow != null)
+            {
+                Messages.Insert(0, "Matching data found");
+                RightTable.Remove(matchingRightRow);
+                logDAL.DeleteEntryFromLogDAL(matchingRightRow);
+                ClearField();
+                return;
+
+            }
+
+
+            // 2. find difference of height
+            matchingRightRow = RightTable.FirstOrDefault(item =>
+                    item.Age == CurrentLeftItem.Age &&
+                    item.President == CurrentLeftItem.President);
+
+            if (matchingRightRow != null)
+            {
+                // if different is 1 then add in log
+                var diff = Math.Abs(matchingRightRow.Height - CurrentLeftItem.Height);
+                if (diff == 1)
+                {
+                    Messages.Insert(0, String.Format("President:{0}, Age{1}, Height Difference is {2}", CurrentLeftItem.President, CurrentLeftItem.Age, diff));
+                }
+            }
+
+
+            CurrentLeftItem.IsLeft = true;
+            var save = logDAL.Create(CurrentLeftItem);
+            if (save)
+            {
+                LeftTable.Add(CurrentLeftItem);
+                ClearField();
+            }
+            else
+            {
+                Messages.Insert(0, "Failed to save");
+            }
+        }
 
         private void ExecuteRightTableSaveCommand()
         {
-            //int totalRightRows = RightTable.Count();
-            //int totalLeftRows = LeftTable.Count();
 
-            //if (totalLeftRows <= 0)
-            //{
-            //    MessageBox.Show("Not enough Rows to compare");
-            //    return;
-            //}
+            if (CurrentRightItem.Age == 0 || CurrentRightItem.Height == 0 || string.IsNullOrEmpty(CurrentRightItem.President))
+            {
+                Messages.Insert(0, "Invalid Data at Right");
+                return;
+            }
 
             // Check if the data already exists in RightTable
             var matchingRightRow = RightTable.FirstOrDefault(item =>
@@ -98,31 +163,41 @@ namespace Matching_Project.ViewModel
 
             if (matchingRightRow != null)
             {
-                Messages.Add("same data is already exists");
+                Messages.Insert(0,"same data is already exists");
                 return;
             }
 
+            // 1. match left table data
             var matchingLeftRow = LeftTable.FirstOrDefault(item =>
+                    item.Age == CurrentRightItem.Age &&
+                    item.Height == CurrentRightItem.Height &&
+                    item.President == CurrentRightItem.President);
+
+            if (matchingLeftRow != null)
+            {
+                Messages.Insert(0, "Matching data found");
+                LeftTable.Remove(matchingLeftRow);
+                logDAL.DeleteEntryFromLogDAL(matchingLeftRow);
+                ClearField();
+                return;
+                
+            }
+
+
+            // 2. find difference of height
+            matchingLeftRow = LeftTable.FirstOrDefault(item =>
                     item.Age == CurrentRightItem.Age &&
                     item.President == CurrentRightItem.President);
 
             if (matchingLeftRow != null)
             {
+                // if different is 1 then add in log
                 var diff = Math.Abs(matchingLeftRow.Height - CurrentRightItem.Height);
                 if (diff == 1)
                 {
-                    Messages.Add(String.Format("President:{0}, Age{1}, Height Difference is {2}", CurrentRightItem.President, CurrentRightItem.Age, diff));
-                }
-                else if (diff == 0)
-                {
-                    // Remove matching row
-                    LeftTable.Remove(matchingLeftRow);
-                    logDAL.DeleteEntryFromLogDAL(matchingLeftRow);
-                    Messages.Add("Matching data found");
-                    return;
+                    Messages.Insert(0, String.Format("President:{0}, Age{1}, Height Difference is {2}", CurrentRightItem.President, CurrentRightItem.Age, diff));
                 }
             }
-                
 
             CurrentRightItem.IsLeft = false;
             var save = logDAL.Create(CurrentRightItem);
@@ -133,7 +208,7 @@ namespace Matching_Project.ViewModel
             }
             else
             {
-                Messages.Add("Failed to save");
+                Messages.Insert(0, "Failed to save");
             }
         }
 
@@ -146,15 +221,8 @@ namespace Matching_Project.ViewModel
             if (deleted)
             {
                 logDAL.Update(CurrentRightItem);
-                // Messages.Add("record is deleted successfully");
+                RightTable.Remove(CurrentRightItem);
                 ClearField();
-            }
-
-
-            else
-
-            {
-                MessageBox.Show("failed to process your Action");
             }
         }
 
@@ -170,44 +238,13 @@ namespace Matching_Project.ViewModel
             {
 
                 logDAL.Update(CurrentLeftItem);
-                // MessageBox.Show("record is deleted successfully");
+                LeftTable.Remove(CurrentLeftItem);
                 ClearField();
             }
 
-
-            else
-            {
-                MessageBox.Show("failed to process your Action");
-            }
-
         }
 
-        private void ExecuteLeftTableSaveCommand()
-        {
-            if (LeftTable.Any(item => item.Age == CurrentLeftItem.Age && item.Height == CurrentLeftItem.Height && item.President == CurrentLeftItem.President))
-            {
-                Messages.Add("Invalid: Duplicate data is not allowed");
-                
-            }
-            
-            else
-            {
-                CurrentLeftItem.IsLeft = true;
-                var save = logDAL.Create(CurrentLeftItem);
-                if (save)
-                {
-                    LeftTable.Add(CurrentLeftItem);
-                    ClearField();
-                    //MessageBox.Show("data save successfully");
-
-                }
-                else
-                {
-                    Messages.Add("Failed to save");
-                    ClearField();
-                }
-            }
-        }
+        
         private void ClearField()
         {
             CurrentLeftItem = new LogData();

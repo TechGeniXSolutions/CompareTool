@@ -38,8 +38,6 @@ namespace Matching_Project
         {
             LoginForm lg = new LoginForm();
             this.Hide();
-            lg.WindowState = WindowState.Maximized;
-            //lg.DataContext = this;
             lg.ShowDialog();
             if (lg.isCancelled == true)
             {
