@@ -137,7 +137,7 @@ namespace Matching_Project.ViewModel
             var save = logDAL.Create(CurrentLeftItem);
             if (save)
             {
-                LeftTable.Add(CurrentLeftItem);
+                LeftTable.Insert(0,CurrentLeftItem);
                 ClearField();
             }
             else
@@ -203,7 +203,7 @@ namespace Matching_Project.ViewModel
             var save = logDAL.Create(CurrentRightItem);
             if (save)
             {
-                RightTable.Add(CurrentRightItem);
+                RightTable.Insert(0,CurrentRightItem);
                 ClearField();
             }
             else
